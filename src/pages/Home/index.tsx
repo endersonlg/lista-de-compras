@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
 import { FlatList, StatusBar, ActivityIndicator } from 'react-native';
 
+import { AppNavigationRoutesProps } from '../../../App';
 import logo from '../../../assets/logo_home.png';
 import { EmptyShoppingCart } from '../../components/EmptyShoppingCart';
 import {
@@ -34,7 +35,7 @@ interface ListProduct {
   finished_at?: Date;
 }
 export function Home() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AppNavigationRoutesProps>();
   const isFocused = useIsFocused();
   const [listShoppings, setListShoppings] = useState<ListProduct[]>([]);
   const [loading, setLoading] = useState(true);

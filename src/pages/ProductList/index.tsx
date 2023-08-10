@@ -12,6 +12,7 @@ import {
   VirtualizedList,
 } from 'react-native';
 
+import { AppNavigationRoutesProps } from '../../../App';
 import { Button } from '../../components/Button';
 import { ProductNotFound } from '../../components/ProductNotFound';
 import { products as data } from '../../data/products';
@@ -49,23 +50,24 @@ export function ProductList() {
     [],
   );
   const [inputSearch, setInputSearch] = useState<string>();
-  const navigation = useNavigation();
+
+  const navigation = useNavigation<AppNavigationRoutesProps>();
   const refInput = useRef<TextInput>(null);
 
   useEffect(() => {
     if (inputSearch) {
-      const filtredProducts = data.filter((product) =>
+      const filteredProducts = data.filter((product) =>
         product.name
           .toLocaleLowerCase()
           .includes(inputSearch.toLocaleLowerCase()),
       );
-      setFilterProducts(filtredProducts);
+      setFilterProducts(filteredProducts);
     } else {
       setFilterProducts(data);
     }
   }, [inputSearch]);
 
-  const substractProduct = (id: number) => {
+  const subtractProduct = (id: number) => {
     const indexProductSelected = selectedProducts.findIndex(
       (selectedProduct) => selectedProduct.id === id,
     );
@@ -151,6 +153,7 @@ export function ProductList() {
           onChangeText={(value) => setInputSearch(value)}
           value={inputSearch}
           placeholder="Pesquisar Produto"
+          //@ts-expect-error:ignora
           ref={refInput}
         />
         <ContainerIconSearch
@@ -201,7 +204,7 @@ export function ProductList() {
                       )?.unidade ?? 0}
                     </DescriptionProduct>
                     <TouchableOpacity
-                      onPress={() => substractProduct(item.id)}
+                      onPress={() => subtractProduct(item.id)}
                       activeOpacity={0.8}
                       style={{ marginRight: 8 }}
                     >

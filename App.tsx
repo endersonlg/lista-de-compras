@@ -2,7 +2,10 @@
 import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import { ThemeProvider } from 'styled-components/native';
@@ -17,6 +20,9 @@ type RootStackParamList = {
   'Lista de Produtos': undefined;
   'Lista de Compra': { index: number };
 };
+
+export type AppNavigationRoutesProps =
+  NativeStackNavigationProp<RootStackParamList>;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -38,21 +44,21 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={Home}
-            options={({ navigation, route }) => ({
+            options={() => ({
               headerShown: false,
             })}
           />
           <Stack.Screen
             name="Lista de Produtos"
             component={ProductList}
-            options={({ navigation, route }) => ({
+            options={() => ({
               headerShown: false,
             })}
           />
           <Stack.Screen
             name="Lista de Compra"
             component={ShoppingList}
-            options={({ navigation, route }) => ({
+            options={() => ({
               headerShown: false,
             })}
           />

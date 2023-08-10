@@ -8,14 +8,9 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import {
-  View,
-  Text,
-  VirtualizedList,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import { View, FlatList, TouchableOpacity } from 'react-native';
 
+import { AppNavigationRoutesProps } from '../../../App';
 import { Button } from '../../components/Button';
 import {
   ContainerProduct,
@@ -53,7 +48,7 @@ export function ShoppingList() {
 
   const route = useRoute<RouteProp<ShoppingListParams, 'ShoopingList'>>();
   const isFocused = useIsFocused();
-  const navigation = useNavigation();
+  const navigation = useNavigation<AppNavigationRoutesProps>();
 
   const indexParam = useMemo(() => Number(route.params.index), [route]);
 
